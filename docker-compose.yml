@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+
+  app:
+    image: "node:18"
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: "npm start"
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - strapi
+
+  strapi:
+    build: "./linkler-cms"
+    environment:
+      - DATABASE_CLIENT=sqlite
+      - DATABASE_FILENAME=strapi.db
+    volumes:
+      - ./linkler-cms/public/uploads:/srv/app/public/uploads
+    ports:
+      - "1337:1337"

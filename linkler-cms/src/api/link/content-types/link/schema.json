@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "links",
+  "info": {
+    "singularName": "link",
+    "pluralName": "links",
+    "displayName": "Link",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "default": "/"
+    },
+    "newtab": {
+      "type": "boolean",
+      "default": false
+    },
+    "Title": {
+      "type": "string",
+      "required": true,
+      "default": "New Link",
+      "unique": true
+    },
+    "Description": {
+      "type": "text",
+      "maxLength": 256,
+      "private": true
+    }
+  }
+}
