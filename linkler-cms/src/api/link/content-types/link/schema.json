@@ -15,7 +15,7 @@
     "url": {
       "type": "string",
       "required": true,
-      "unique": true,
+      "unique": false,
       "default": "/"
     },
     "newtab": {
@@ -30,8 +30,26 @@
     },
     "Description": {
       "type": "text",
-      "maxLength": 256,
-      "private": true
+      "maxLength": 128
+    },
+    "Icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Document": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

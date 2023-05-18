@@ -1,0 +1,15 @@
+{
+  "name": "linkler",
+  "version": "1.0.0",
+  "description": "Simple link landing page, features a strapi CMS for adding new link entries",
+  "main": "index.js",
+  "scripts": {
+    "backup": "cp -r ./linkler-cms/.tmp ./.tmp.backup",
+    "restore": "rm -rf ./linkler-cms/.tmp ; cp -r ./.tmp.backup/ ./linkler-cms/.tmp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+  }
+}

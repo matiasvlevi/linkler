@@ -1,25 +1,38 @@
 version: "3.9"
 
 services:
-
-  app:
-    image: "node:18"
-    working_dir: /app
-    volumes:
-      - ./:/app
-    command: "npm start"
+  frontend:
     build: ./frontend
+    container_name: frontend
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
     ports:
       - "3000:3000"
+    command: "npm start"
     depends_on:
+      - strapi
+    networks:
       - strapi
 
   strapi:
     build: "./linkler-cms"
-    environment:
-      - DATABASE_CLIENT=sqlite
-      - DATABASE_FILENAME=strapi.db
+    env_file: ./linkler-cms/.env
     volumes:
-      - ./linkler-cms/public/uploads:/srv/app/public/uploads
+      - ./linkler-cms/config:/opt/app/config
+      - ./linkler-cms/src:/opt/app/src
+      - ./linkler-cms/package.json:/opt/package.json
+      - ./linkler-cms/.env:/opt/app/.env
+      - ./linkler-cms/public/uploads:/opt/app/public/uploads
     ports:
       - "1337:1337"
+    networks:
+      - strapi
+
+volumes:
+  strapi-data:
+
+networks:
+  strapi:
+    name: Strapi
+    driver: bridge

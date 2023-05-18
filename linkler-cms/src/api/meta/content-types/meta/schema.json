@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "metas",
+  "info": {
+    "singularName": "meta",
+    "pluralName": "metas",
+    "displayName": "Meta"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "default": "Your Name"
+    },
+    "Email": {
+      "type": "email"
+    }
+  }
+}
