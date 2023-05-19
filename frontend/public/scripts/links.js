@@ -18,7 +18,7 @@ function renderText(tag, className, content) {
     return txt;
 }
 
-function renderLink({ id, attributes }) {
+function renderLink({ attributes }) {
 
     const link = document.createElement('div');
     link.classList.add('link-wrapper');
@@ -37,13 +37,19 @@ function renderLink({ id, attributes }) {
     if (attributes.Document.data) {
         attributes.url = `${url}${attributes.Document.data.attributes.url}`;
         link.setAttribute('download', true);
-    } 
+    }
     
-    // Set clickable and href
-    link.setAttribute('onclick', `location.href='${attributes.url}';`);
+    const aref = document.createElement('a');
+    aref.setAttribute('href', attributes.url);
+    
+    aref.setAttribute('id', `ext-${attributes['GTM_Label']}`);
 
-    link.style.cursor = 'pointer';
-    
+    if (attributes.newtab) {
+        aref.setAttribute('target', '_blank');
+    }
+    aref.style.cursor = 'pointer';
+    aref.appendChild(link);
+
     return link;
 }
 
