@@ -62,7 +62,6 @@ main {
     margin: auto;
     padding: 1.15rem;
 
-    /* Media Query */
     width: 89%;
 }
 
@@ -72,7 +71,7 @@ img {
 
 .link-title,
 .link-description {
-    margin: 0.4rem;
+    margin: 0.35rem;
 }
 
 div.link-wrapper {
