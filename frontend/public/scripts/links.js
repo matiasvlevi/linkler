@@ -58,7 +58,7 @@ function render({ data }) {
     }
 }
 
-function typewriter(element, text, speed = 30, i = 0) {
+function typewriter(element, text, speed = 35, i = 0) {
     function typeNextCharacter() {
         element.textContent += text[i];
         i++;
