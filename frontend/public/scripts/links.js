@@ -1,4 +1,4 @@
-const url = 'http://10.0.0.77:1337';
+const url = 'http://170.187.182.24:1337';
 
 function renderIcon({ Icon }) {
     const icon = document.createElement('img');
@@ -22,7 +22,6 @@ function renderLink({ attributes }) {
 
     const link = document.createElement('div');
     link.classList.add('link-wrapper');
-    link.setAttribute('id', id);
 
     // Render Icon
     link.appendChild(renderIcon(attributes));   
@@ -36,7 +35,6 @@ function renderLink({ attributes }) {
 
     if (attributes.Document.data) {
         attributes.url = `${url}${attributes.Document.data.attributes.url}`;
-        link.setAttribute('download', true);
     }
     
     const aref = document.createElement('a');
@@ -50,7 +48,7 @@ function renderLink({ attributes }) {
     aref.style.cursor = 'pointer';
     aref.appendChild(link);
 
-    return link;
+    return aref;
 }
 
 function render({ data }) {
