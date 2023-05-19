@@ -50,6 +50,12 @@
         "videos",
         "audios"
       ]
+    },
+    "GTM_Label": {
+      "type": "string",
+      "regex": "^[A-Za-z]+[\\w\\-\\:\\.]*$",
+      "default": "unlabeled",
+      "required": true
     }
   }
 }
