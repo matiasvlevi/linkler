@@ -12,7 +12,6 @@ services:
       - ./linkler-frontend/tasks:/linkler-frontend/tasks
       - ./linkler-frontend/index.js:/linkler-frontend/index.js
       - /linkler-frontend/node_modules
-      - ./.env:/linkler-frontend/.env
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
     depends_on:
@@ -28,7 +27,6 @@ services:
       - ./linkler-cms/config:/opt/app/config
       - ./linkler-cms/src:/opt/app/src
       - ./linkler-cms/package.json:/opt/package.json
-      - ./.env:/opt/app/.env
       - ./linkler-cms/public/uploads:/opt/app/public/uploads
       - ./backups:/opt/app/backups
     ports:
