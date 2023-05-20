@@ -6,20 +6,6 @@ const css = require('clean-css');
 
 require('dotenv').config({ path:'.env' });
 
-const files = {
-    src: 'src',
-    dest: 'dist',
-    js: './src/scripts',
-    css: './src/styles',
-    index: './src/index.template',
-    google: {
-        ga: { head: './src/google/ga_head.template'},
-        gtm: {
-            head: './src/google/gtm_head.template',
-            body: './src/google/gtm_body.template'
-        }
-    }
-}
 
 async function handleJS(files) {
     const src = fs.readdirSync(files.js)
@@ -117,7 +103,15 @@ function moveIndex(files) {
     );
 }
 
-const main = (async () => {
+function copyAssets(files) {
+    fs.cpSync(
+        files.assets,
+        files.assets.replace(files.src, files.dest),
+        { recursive: true }
+    );    
+}
+
+const build = (async (files) => {
     if (!fs.existsSync(files.dest)) {
         fs.mkdirSync(files.dest);
     }
@@ -125,6 +119,21 @@ const main = (async () => {
     await handleJS(files);
     handleCSS(files);
     moveIndex(files);
+    copyAssets(files);
 });
 
-main();
+build({
+    src: 'src',
+    dest: 'dist',
+    js: './src/scripts',
+    css: './src/styles',
+    assets: './src/assets',
+    index: './src/index.template',
+    google: {
+        ga: { head: './src/google/ga_head.template'},
+        gtm: {
+            head: './src/google/gtm_head.template',
+            body: './src/google/gtm_body.template'
+        }
+    }
+});
