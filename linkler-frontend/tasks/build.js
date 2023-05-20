@@ -14,7 +14,7 @@ async function handleJS(files) {
 
     for (let file of src) {
         const content = fs.readFileSync(file, 'utf-8');
-        await terser.minify(content).then(({code}) => {
+        await terser.minify(content).then(({ code }) => {
             if (!fs.existsSync(files.js.replace(files.src, files.dest))) {
                 fs.mkdirSync(files.js.replace(files.src, files.dest));
             }
