@@ -5,7 +5,7 @@ const path = require('node:path');
 
 const server = express();
 
-server.use(express.static(path.join(__dirname, './public')));
+server.use(express.static(path.join(__dirname, './dist')));
 
 server.listen(process.env.WEB_PORT, () => {
     console.log(

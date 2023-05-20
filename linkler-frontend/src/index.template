@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{GA-HEAD}}
+    {{GTM-HEAD}}
+    <link rel="stylesheet" href="./styles/style.css">
+    <script src="./scripts/links.js"></script>
+
+    <title>Linkler |</title>
+</head>
+<body>
+    {{GTM-BODY}}
+    <script>main()</script>
+    <main id="no-select">
+        <header>
+            <h1 class="title typewriter">&zwnj;</h1>
+        </header>
+    </main>
+</body>
+</html>

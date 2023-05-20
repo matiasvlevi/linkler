@@ -7,7 +7,10 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+COPY ../.env .env
 
-EXPOSE 3000
+EXPOSE ${WEB_PORT}
+
+RUN npm run build
 
 CMD ["npm", "start"]
