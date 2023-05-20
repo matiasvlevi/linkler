@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/style.css">
     <script src="./scripts/links.js"></script>
 
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
     <title>Linkler |</title>
 </head>
 <body>
