@@ -30,6 +30,7 @@ services:
       - ./linkler-cms/package.json:/opt/package.json
       - ./.env:/opt/app/.env
       - ./linkler-cms/public/uploads:/opt/app/public/uploads
+      - ./backup.tar.gz.enc:/opt/app/backup.tar.gz.enc
     ports:
       - "${PORT}:${PORT}"
     networks:
