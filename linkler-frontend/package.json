@@ -1,14 +1,14 @@
 {
   "name": "linkler-frontend",
   "version": "0.0.1",
-  "description": "",
+  "description": "linkler's dynamic frontend",
   "main": "index.js",
   "scripts": {
     "start": "node .",
     "build": "node ./tasks/build.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matias Vazquez-Levi",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
