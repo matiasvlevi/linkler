@@ -7,7 +7,7 @@ async function main() {
         const icon = document.createElement('img');
         icon.classList.add('link-icon');
 
-        icon.setAttribute('src', `${origin}${Icon.data.attributes.origin}`);
+        icon.setAttribute('src', `${origin}${Icon.data.attributes.url}`);
 
         return icon;
     }
@@ -22,7 +22,6 @@ async function main() {
     }
 
     function renderLink({ attributes }) {
-
         const link = document.createElement('div');
         link.classList.add('link-wrapper');
 
@@ -37,11 +36,11 @@ async function main() {
         link.appendChild(meta);
 
         if (attributes.Document.data) {
-            attributes.origin = `${origin}${attributes.Document.data.attributes.origin}`;
+            attributes.url = `${origin}${attributes.Document.data.attributes.url}`;
         }
         
         const aref = document.createElement('a');
-        aref.setAttribute('href', attributes.origin);
+        aref.setAttribute('href', attributes.url);
         
         aref.setAttribute('id', `ext-${attributes['GTM_Label']}`);
 
