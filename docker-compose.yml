@@ -2,14 +2,19 @@ version: "3.9"
 
 services:
   frontend:
-    build: ./frontend
-    container_name: frontend
+    build: ./linkler-frontend
+    container_name: linkler-frontend
+    env_file: .env
     volumes:
-      - ./frontend:/frontend
-      - /frontend/node_modules
+      - ./linkler-frontend/dist:/linkler-frontend/dist
+      - ./linkler-frontend/src:/linkler-frontend/src
+      - ./linkler-frontend/package.json:/linkler-frontend/package.json
+      - ./linkler-frontend/tasks:/linkler-frontend/tasks
+      - ./linkler-frontend/index.js:/linkler-frontend/index.js
+      - /linkler-frontend/node_modules
+      - ./.env:/linkler-frontend/.env
     ports:
-      - "3000:3000"
-    command: "npm start"
+      - "${WEB_PORT}:${WEB_PORT}"
     depends_on:
       - strapi
     networks:
@@ -17,15 +22,16 @@ services:
 
   strapi:
     build: "./linkler-cms"
-    env_file: ./linkler-cms/.env
+    container_name: linkler-cms
+    env_file: .env
     volumes:
       - ./linkler-cms/config:/opt/app/config
       - ./linkler-cms/src:/opt/app/src
       - ./linkler-cms/package.json:/opt/package.json
-      - ./linkler-cms/.env:/opt/app/.env
+      - ./.env:/opt/app/.env
       - ./linkler-cms/public/uploads:/opt/app/public/uploads
     ports:
-      - "1337:1337"
+      - "${PORT}:${PORT}"
     networks:
       - strapi
 
