@@ -1,13 +1,13 @@
 // Entrypoint and main scope
 async function main() {
-    const u = new URL(window.location.href);
-    const url = `${u.protocol}//${u.hostname}:1337`;
+    const { protocol, hostname } = new URL(window.location.href);
+    const origin = `${protocol}//${hostname}:1337`;
 
     function renderIcon({ Icon }) {
         const icon = document.createElement('img');
         icon.classList.add('link-icon');
 
-        icon.setAttribute('src', `${url}${Icon.data.attributes.url}`);
+        icon.setAttribute('src', `${origin}${Icon.data.attributes.origin}`);
 
         return icon;
     }
@@ -37,11 +37,11 @@ async function main() {
         link.appendChild(meta);
 
         if (attributes.Document.data) {
-            attributes.url = `${url}${attributes.Document.data.attributes.url}`;
+            attributes.origin = `${origin}${attributes.Document.data.attributes.origin}`;
         }
         
         const aref = document.createElement('a');
-        aref.setAttribute('href', attributes.url);
+        aref.setAttribute('href', attributes.origin);
         
         aref.setAttribute('id', `ext-${attributes['GTM_Label']}`);
 
@@ -65,7 +65,7 @@ async function main() {
         }
     }
 
-    function typewriter(element, text, speed = 35, i = 0) {
+    function typewriter(element, text, speed = 42, i = 0) {
         function typeNextCharacter() {
             element.textContent += text[i];
             i++;
@@ -84,7 +84,7 @@ async function main() {
     }
 
     // Render meta data
-    fetch(`${url}/api/meta`)
+    fetch(`${origin}/api/meta`)
         .then((res) => res.json())
         .then((meta) => {
             // Set page title
@@ -92,11 +92,18 @@ async function main() {
             
             // Render name
             const title = document.querySelector('h1.title');
-            typewriter(title, meta.data.attributes.Name);
+            if (meta.data.attributes.Typewriter_Effect) {
+                title.classList.add('typewriter');
+                setTimeout(() =>
+                    typewriter(title, meta.data.attributes.Name),
+                100);
+            } else {
+                title.textContent = meta.data.attributes.Name;
+            }
         });
 
     // Render Links
-    fetch(`${url}/api/links?populate=*`)
+    fetch(`${origin}/api/links?populate=*`)
         .then(res => res.json())
         .then(links => render(links));    
 }
