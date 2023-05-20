@@ -1,6 +1,6 @@
 FROM node:18
 
-WORKDIR /frontend
+WORKDIR /linkler-frontend
 
 COPY package*.json ./
 
