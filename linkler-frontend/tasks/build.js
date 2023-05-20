@@ -6,7 +6,6 @@ const css = require('clean-css');
 
 require('dotenv').config({ path:'.env' });
 
-
 async function handleJS(files) {
     const src = fs.readdirSync(files.js)
                     .filter(filename => filename.endsWith('.js'))
