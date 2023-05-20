@@ -8,8 +8,8 @@ RUN npm ci
 
 COPY . .
 
-EXPOSE ${WEB_PORT}
-
 RUN npm run build
+
+EXPOSE ${WEB_PORT}
 
 CMD ["npm", "start"]
