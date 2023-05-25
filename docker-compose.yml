@@ -5,12 +5,12 @@ services:
     build: ./linkler-frontend
     container_name: linkler-frontend
     env_file: .env
+    environment:
+      WEB_PORT: ${WEB_PORT}
+      GTM_KEY: ${GTM_KEY}
+      GA_KEY: ${GA_KEY}
     volumes:
-      - ./linkler-frontend/dist:/linkler-frontend/dist
-      - ./linkler-frontend/src:/linkler-frontend/src
-      - ./linkler-frontend/package.json:/linkler-frontend/package.json
-      - ./linkler-frontend/tasks:/linkler-frontend/tasks
-      - ./linkler-frontend/index.js:/linkler-frontend/index.js
+      - ./linkler-frontend:/linkler-frontend
       - /linkler-frontend/node_modules
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
