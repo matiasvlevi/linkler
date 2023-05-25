@@ -27,7 +27,6 @@ services:
       - ./linkler-cms/config:/opt/app/config
       - ./linkler-cms/src:/opt/app/src
       - ./linkler-cms/package.json:/opt/package.json
-      - ./linkler-cms/public/uploads:/opt/app/public/uploads
       - ./backups:/opt/app/backups
     ports:
       - "${PORT}:${PORT}"
