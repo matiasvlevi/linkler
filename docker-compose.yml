@@ -17,7 +17,8 @@ services:
     depends_on:
       - strapi
     networks:
-      - strapi
+      strapi:
+        ipv4_address: 172.21.0.3
 
   strapi:
     build: "./linkler-cms"
@@ -31,7 +32,8 @@ services:
     ports:
       - "${PORT}:${PORT}"
     networks:
-      - strapi
+      strapi:
+        ipv4_address: 172.21.0.2
 
 volumes:
   strapi-data:
@@ -40,3 +42,6 @@ networks:
   strapi:
     name: Strapi
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/29
