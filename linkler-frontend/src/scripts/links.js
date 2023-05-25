@@ -1,9 +1,7 @@
 // Entrypoint and main scope
 async function main() {
-    const { hostname } = new URL(window.location.href);
-    // Should enforce https on strapi
-    // see https://github.com/strapi/strapi/issues/171
-    const origin = `http://${hostname}:1337`;
+    const { protocol, hostname } = new URL(window.location.href);
+    const origin = `${protocol}//${hostname}`;
 
     function renderIcon({ Icon }) {
         const icon = document.createElement('img');
