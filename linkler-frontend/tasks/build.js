@@ -4,12 +4,12 @@ const path = require('node:path');
 const terser = require('terser');
 const css = require('clean-css');
 
-require('dotenv').config({ path:'.env' });
+require('dotenv').config({ path: '.env' });
 
 async function handleJS(files) {
     const src = fs.readdirSync(files.js)
-                    .filter(filename => filename.endsWith('.js'))
-                    .map(filename => path.join(files.js, filename));
+        .filter(filename => filename.endsWith('.js'))
+        .map(filename => path.join(files.js, filename));
 
     for (let file of src) {
         const content = fs.readFileSync(file, 'utf-8');
@@ -27,8 +27,8 @@ async function handleJS(files) {
 
 function handleCSS(files) {
     const src = fs.readdirSync(files.css)
-                    .filter(filename => filename.endsWith('.css'))
-                    .map(filename => path.join(files.css, filename));
+        .filter(filename => filename.endsWith('.css'))
+        .map(filename => path.join(files.css, filename));
 
     for (let file of src) {
         const content = fs.readFileSync(file, 'utf-8');
@@ -49,7 +49,7 @@ function injectGA(files, template) {
     const ga_reg = new RegExp(/\{\{GA-HEAD\}\}/gm);
     template = template.replaceAll(ga_reg, fs.readFileSync(files.google.ga.head));
 
-    const ga_key_reg  = new RegExp(/\{\{GA-KEY\}\}/gm);
+    const ga_key_reg = new RegExp(/\{\{GA-KEY\}\}/gm);
     template = template.replaceAll(ga_key_reg, process.env.GA_KEY);
 
     return template;
@@ -98,7 +98,7 @@ function moveIndex(files) {
 
     fs.writeFileSync(
         files.index.replace(files.src, files.dest).replace('template', 'html'),
-        html,'utf-8'
+        html, 'utf-8'
     );
 }
 
@@ -107,7 +107,7 @@ function copyAssets(files) {
         files.assets,
         files.assets.replace(files.src, files.dest),
         { recursive: true }
-    );    
+    );
 }
 
 const build = (async (files) => {
@@ -129,7 +129,7 @@ build({
     assets: './src/assets',
     index: './src/index.template',
     google: {
-        ga: { head: './src/google/ga_head.template'},
+        ga: { head: './src/google/ga_head.template' },
         gtm: {
             head: './src/google/gtm_head.template',
             body: './src/google/gtm_body.template'
