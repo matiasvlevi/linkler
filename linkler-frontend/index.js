@@ -2,23 +2,45 @@ require('dotenv').config();
 
 const express = require('express');
 
-const https = require('node:https');
 const fs = require('node:fs');
+const { readFileOrUndefined } = require('./server/readFileOrUndefined');
+
+const https = require('node:https');
 const path = require('node:path');
+const { strapi } = require('./server/strapi');
 
 const app = express();
+
+app.use(express.json());
 
 // Static host the ./dist directory
 app.use(express.static(path.join(__dirname, './dist')));
 
-function readFileOrUndefined(filepath, codec) {
-    try {
-        return fs.readFileSync(filepath, codec);
-    } catch(e) {
-        console.log(`Something went wrong while reading the ${filepath} file`);
-        return undefined;
-    }
-}
+/**
+ * Bind api strapi endpoints  
+ */
+app.get('/api/*', async (req, res) => {
+    const url = strapi(req.originalUrl);
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    res.send(data);
+});
+
+/**
+ * Bind uploads strapi endpoints 
+ */
+app.get('/uploads/*', async (req, res) => {
+    const url = strapi(req.originalUrl);
+
+    const response = await fetch(url);
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    res.set('Content-Type', response.headers.get('Content-Type'));
+    res.send(buffer);
+});
 
 if (fs.existsSync('./ssl')) {
     // If SSL credentials were added host HTTPS server
@@ -34,7 +56,7 @@ if (fs.existsSync('./ssl')) {
     server.listen(process.env.WEB_PORT || 443, () => {
         console.log(
             `Server is listening on port ${process.env.WEB_PORT}\n`+
-            `https://localhost:${process.env.WEB_PORT}`
+            `https://localhost:${process.env.WEB_PORT || 443}`
         );
     })
 
