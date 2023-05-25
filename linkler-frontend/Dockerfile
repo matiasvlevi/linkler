@@ -8,8 +8,13 @@ RUN npm ci
 
 COPY . .
 
-RUN npm run build
-
 EXPOSE ${WEB_PORT}
+
+ARG GTM_KEY
+ARG GA_KEY
+ENV GTM_KEY=${GTM_KEY}
+ENV GA_KEY=${GA_KEY}
+
+RUN npm run build
 
 CMD ["npm", "start"]
