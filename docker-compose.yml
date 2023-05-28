@@ -2,15 +2,19 @@ version: "3.9"
 
 services:
   frontend:
-    build: ./linkler-frontend
+    build:
+      context: ./linkler-frontend
+      dockerfile: Dockerfile
+      args:
+        WEB_PORT: ${WEB_PORT}
+        GTM_KEY: ${GTM_KEY}
+        GA_KEY: ${GA_KEY}
     container_name: linkler-frontend
     env_file: .env
-    environment:
-      WEB_PORT: ${WEB_PORT}
-      GTM_KEY: ${GTM_KEY}
-      GA_KEY: ${GA_KEY}
+
     volumes:
       - ./linkler-frontend:/linkler-frontend
+      - /linkler-frontend/dist
       - /linkler-frontend/node_modules
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
