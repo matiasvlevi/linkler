@@ -24,23 +24,26 @@ async function handleJS(files) {
 }
 
 function handleCSS(files) {
-    const src = fs.readdirSync(files.css)
-        .filter(filename => filename.endsWith('.css'))
-        .map(filename => path.join(files.css, filename));
+    let themeFile = `${files.config.theme}.css`;
+    let themePath = path.join(files.themes, themeFile);
 
-    for (let file of src) {
-        const content = fs.readFileSync(file, 'utf-8');
-
-        const { styles } = new css({}).minify(content);
-
-        if (!fs.existsSync(files.css.replace(files.src, files.dest))) {
-            fs.mkdirSync(files.css.replace(files.src, files.dest));
-        }
-        fs.writeFileSync(
-            file.replace(files.src, files.dest),
-            styles, 'utf-8'
-        );
+    if (!fs.existsSync(themePath)) {
+        themeFile = 'classic.css';
+        themePath = path.join(files.themes, themeFile);
     }
+
+    const content = fs.readFileSync(themePath, 'utf-8');
+
+    const { styles } = new css({}).minify(content);
+
+    if (!fs.existsSync(files.css.replace(files.src, files.dest))) {
+        fs.mkdirSync(files.css.replace(files.src, files.dest));
+    }
+    fs.writeFileSync(
+        path.join(files.css.replace(files.src, files.dest), 'style.css'),
+        styles, 'utf-8'
+    );
+    
 }
 
 function injectGA(files, template) {
@@ -120,17 +123,21 @@ const build = (async (files) => {
 });
 
 build({
-    src: 'src',
-    dest: 'dist',
-    js: './src/scripts',
-    css: './src/styles',
-    assets: './src/assets',
-    index: './src/page.template',
+    config: require('../.linklerrc.js'),
+    src: "src",
+    dest: "dist",
+    themes: "./themes",
+    css:  "./src/styles",
+    js: "./src/scripts",
+    assets: "./src/assets",
+    index: "./src/page.template",
     google: {
-        ga: { head: './src/google/ga_head.template' },
+        ga: { 
+            head: "./src/google/ga_head.template"
+        },
         gtm: {
-            head: './src/google/gtm_head.template',
-            body: './src/google/gtm_body.template'
+            head: "./src/google/gtm_head.template",
+            body: "./src/google/gtm_body.template"
         }
     }
 });
