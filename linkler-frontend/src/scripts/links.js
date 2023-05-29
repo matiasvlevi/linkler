@@ -64,10 +64,25 @@ async function main() {
         }
     }
 
+    function renderError() {
+        const container = document.querySelector('main');
+
+        const p = document.createElement('p');
+        p.textContent = 'No links found.';
+        
+        container.appendChild(p);
+    }
+
     // Render Links
     fetch(`${origin}/api/links?populate=*`)
         .then(res => res.json())
-        .then(links => render(links));    
+        .then(links => {
+            if (links.error) {
+                renderError();
+            } else {
+                render(links)
+            }
+        });    
 }
 
 async function name(name, typewriterEffect) {
