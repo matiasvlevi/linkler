@@ -21,6 +21,15 @@ a {
     text-decoration: none;
 }
 
+h1.typewriter {
+    border-right: .15em solid var(--on-background);
+    animation: caret .9s step-end infinite;
+}
+
+img {
+    width: 18%;
+}
+
 header {
     display: flex;
     justify-content: left;
@@ -38,13 +47,7 @@ h1.title {
     padding-right: 0.4rem;
 }
 
-h1.typewriter {
-    border-right: .15em solid var(--on-background);
-    animation: caret .9s step-end infinite;
-}
-
 h5.sub-title {
-
     margin-top: 0px;
     margin-bottom: 0.5rem;
 }
@@ -67,10 +70,6 @@ main {
     padding: 1.15rem;
 
     width: 89%;
-}
-
-img {
-    width: 18%;
 }
 
 .link-title,
@@ -107,14 +106,12 @@ div.meta-wrapper {
     flex-direction: column;
 }
 
-/* smartphones, iPhone, portrait 480x320 phones */
 @media (min-width:320px)  { 
     main {
         width: 90%;
     }
 }
 
-/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
 @media (min-width:481px)  { 
     main {
         width: 86%;
@@ -124,14 +121,12 @@ div.meta-wrapper {
     }
 }
 
-/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
 @media (min-width:641px)  { 
     main {
         width: 76%;
     }
 }
 
-/* tablet, landscape iPad, lo-res laptops ands desktops */
 @media (min-width:961px)  { 
     main {
         width: 58%;
@@ -145,7 +140,6 @@ div.meta-wrapper {
     }
 }
 
-/* big landscape tablets, laptops, and desktops */
 @media (min-width:1025px) { 
     main {
         width: 46%;
@@ -159,7 +153,6 @@ div.meta-wrapper {
     }
 }
 
-/* hi-res laptops and desktops */
 @media (min-width:1281px) { 
     main {
         width: 32%;
