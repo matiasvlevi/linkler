@@ -10,9 +10,9 @@
     <script src="./scripts/links.js"></script>
 
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
-    <title>Linkler |</title>
+    <title>Linkler | {{META-NAME}}</title>
 </head>
-<body>
+<body onload="name('{{META-NAME}}', {{META-TYPEWRITER}})">
     {{GTM-BODY}}
     <script>main()</script>
     <main id="no-select">

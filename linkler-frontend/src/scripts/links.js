@@ -64,6 +64,13 @@ async function main() {
         }
     }
 
+    // Render Links
+    fetch(`${origin}/api/links?populate=*`)
+        .then(res => res.json())
+        .then(links => render(links));    
+}
+
+async function name(name, typewriterEffect) {
     function typewriter(element, text, speed = 42, i = 0) {
         function typeNextCharacter() {
             element.textContent += text[i];
@@ -82,27 +89,15 @@ async function main() {
         setTimeout(typeNextCharacter, speed);
     }
 
-    // Render meta data
-    fetch(`${origin}/api/meta`)
-        .then((res) => res.json())
-        .then((meta) => {
-            // Set page title
-            document.title += ` ${meta.data.attributes.Name}`;
-            
-            // Render name
-            const title = document.querySelector('h1.title');
-            if (meta.data.attributes.Typewriter_Effect) {
-                title.classList.add('typewriter');
-                setTimeout(() =>
-                    typewriter(title, meta.data.attributes.Name),
-                100);
-            } else {
-                title.textContent = meta.data.attributes.Name;
-            }
-        });
+    // Render name
+    const title = document.querySelector('h1.title');
 
-    // Render Links
-    fetch(`${origin}/api/links?populate=*`)
-        .then(res => res.json())
-        .then(links => render(links));    
+    if (typewriterEffect) {
+        title.classList.add('typewriter');
+        setTimeout(() =>
+            typewriter(title, name),
+        100);
+    } else {
+        title.textContent = name;
+    }
 }

@@ -125,7 +125,7 @@ build({
     js: './src/scripts',
     css: './src/styles',
     assets: './src/assets',
-    index: './src/index.template',
+    index: './src/page.template',
     google: {
         ga: { head: './src/google/ga_head.template' },
         gtm: {

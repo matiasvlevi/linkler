@@ -17,15 +17,30 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, './dist')));
 
 /**
- * Bind api strapi endpoints  
+ * Static host the ./dist directory
  */
-app.get('/api/*', async (req, res) => {
-    const url = strapi(req.originalUrl);
+app.use(express.static(path.join(__dirname, './dist')));
 
-    const response = await fetch(url);
-    const data = await response.json();
+app.get('/', async (req, res) => {
+    let html = fs.readFileSync('./dist/page.html', 'utf-8');
 
-    res.send(data);
+    const response = await fetch(`http://${process.env.STRAPI_HOST}:${process.env.PORT}/api/meta`);
+    const { data } = await response.json();
+
+    // If no meta data found, send html
+    if (data === null) {
+        res.send(html);
+        return;
+    }
+
+    // If meta data found, add it to the html
+    if (data.attributes.Name) {
+        html = html.replaceAll('{{META-NAME}}', data.attributes.Name || '');
+        html = html.replaceAll('{{META-TYPEWRITER}}', data.attributes.Typewriter_Effect ?? false);
+    }
+
+    // Send html
+    res.send(html);
 });
 
 /**
