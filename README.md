@@ -2,6 +2,8 @@
 
 Customizable link landing page
 
+[See Deployed example](https://links.matiasvlevi.com)
+
 #### Features
 
 - Strapi CMS
@@ -33,3 +35,12 @@ docker compose build
 ```
 docker compose up
 ```
+
+<br/>
+
+---
+
+### Notes
+
+You might want to add `find` and `findOne` permissions to `links` and `meta` apis in the strapi Role Settings.
+This is planned to be bootstrapped by default in the next versions.
