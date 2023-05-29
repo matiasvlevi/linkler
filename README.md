@@ -2,7 +2,7 @@
 
 Create customizable Landing Pages for Your Links
 
-[See Deployed example](https://links.matiasvlevi.com)
+[See Deployed Example](https://links.matiasvlevi.com)
 
 #### Features
 
@@ -35,6 +35,8 @@ docker compose build
 ```
 docker compose up
 ```
+
+Once up, you can access the link page at `http://127.0.0.1:WEB_PORT` and the admin dashboard at `http://127.0.0.1:WEB_PORT/admin`
 
 <br/>
 
