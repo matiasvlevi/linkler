@@ -33,8 +33,8 @@ services:
       - ./linkler-cms/src:/opt/app/src
       - ./linkler-cms/package.json:/opt/package.json
       - ./backups:/opt/app/backups
-    ports:
-      - "${PORT}:${PORT}"
+    expose:
+      - "${PORT}"
     networks:
       strapi:
         ipv4_address: 172.21.0.2
