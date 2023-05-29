@@ -2,14 +2,22 @@
 
 Create customizable Landing Pages for Your Links
 
+<p align="center">
+    <img src="docs/screenshots/all_themes.png"></img>
+</p>
+
 [See Deployed Example](https://links.matiasvlevi.com)
 
-#### Features
+<br/>
+
+### Features
 
 - Strapi CMS
 - Google Tag Manager & Google Analitics (Optional)
 - SSL (Optional)
 - Themes
+
+<br/>
 
 ## Configure
 
@@ -29,7 +37,7 @@ If no files are found in the SSL directory, the server will host as a regular HT
 
 ## Themes
 
-[See here](./docs/THEMING.md)
+[Configure themes](./docs/THEMING.md)
 
 ## Build
 
