@@ -9,6 +9,7 @@ Create customizable Landing Pages for Your Links
 - Strapi CMS
 - Google Tag Manager & Google Analitics (Optional)
 - SSL (Optional)
+- Themes
 
 ## Configure
 
@@ -25,6 +26,10 @@ If you have an SSL certificate and private key, you can put the files in the `./
 | CA bundle (optional) | `./linkler-frontend/ssl/ca.pem`   |
 
 If no files are found in the SSL directory, the server will host as a regular HTTP server
+
+## Themes
+
+[See here](./docs/THEMING.md)
 
 ## Build
 
