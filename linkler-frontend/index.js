@@ -17,19 +17,21 @@ const app = express();
 app.use(express.static(path.join(__dirname, './dist')));
 
 app.get('/', async (req, res) => {
-    let html = fs.readFileSync('./dist/page.html', 'utf-8');
+    let html = '';
 
     const response = await fetch(`http://${process.env.STRAPI_HOST}:${process.env.PORT}/api/meta`);
     const { data } = await response.json();
 
     // If no meta data found, send html
     if (data === null) {
+        html = '404';
         res.send(html);
         return;
     }
 
     // If meta data found, add it to the html
     if (data.attributes.Name) {
+        html = fs.readFileSync('./dist/page.html', 'utf-8');
         html = html.replaceAll('{{META-NAME}}', data.attributes.Name || '');
         html = html.replaceAll('{{META-TYPEWRITER}}', data.attributes.Typewriter_Effect ?? false);
     }
