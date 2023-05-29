@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+    --bck: #5ED481;
+    --srf: #66e18b;
+
+    --on-bck: #264653; 
+    --on-srf: #264653; 
+}
+
+#no-select {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1.typewriter {
+    border-right: .15em solid var(--on-bck);
+    animation: caret .9s step-end infinite;
+}
+
+@keyframes caret {
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: var(--on-bck);
+    }
+}
+
+header {
+    display: flex;
+    justify-content: left;
+}
+
+h1.name {
+    margin-top: 0.5rem;
+    margin-bottom: 0px;
+
+    padding-right: 0.4rem;
+}
+
+html, body {
+    background-color: var(--bck);
+    color: var(--on-bck);
+    font-family: 'Poppins', 'sans-serif';
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
+    justify-content: center;
+    align-items: stretch;
+
+    margin: auto;
+    padding: 1.15rem;
+
+    width: 89%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.title,
+.description {
+    margin: 0.25rem;
+}
+
+.icon {
+    width: 12%;
+    margin-left: 1.5rem;
+}
+
+.link {
+    background-color: var(--srf);
+    color: var(--on-srf);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.75rem;
+
+    border-radius: 4.5625rem;
+    box-shadow: 5px 11px 0px 5px #264653;
+
+    padding: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    transition: 0.25s;
+}
+
+.link:active {
+    box-shadow: 0px 0px 0px 0px #264653;
+    transform: translate(5px, 11px);
+    transition: 0.25s;
+}
+
+@media (min-width:320px)  { 
+    main {
+        width: 90%;
+    }
+}
+
+@media (min-width:481px)  { 
+    main {
+        width: 86%;
+    }
+    .link {
+        padding: 1.25rem;
+    }
+}
+
+@media (min-width:641px)  { 
+    main {
+        width: 76%;
+    }
+}
+
+@media (min-width:961px)  { 
+    main {
+        width: 58%;
+    }
+
+    .link:hover {
+        box-shadow: 0px 0px 0px 0px #264653;
+        transform: translate(5px, 11px);
+        transition: 0.25s;
+    }
+}
+
+@media (min-width:1025px) { 
+    main {
+        width: 46%;
+    }
+}
+
+@media (min-width:1281px) { 
+    main {
+        width: 32%;
+    }
+
+    .link {
+        padding: 1.8rem;
+    }
+}
