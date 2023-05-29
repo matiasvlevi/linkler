@@ -17,7 +17,7 @@
     <script>main()</script>
     <main id="no-select">
         <header>
-            <h1 class="title">&zwnj;</h1>
+            <h1 class="name">&zwnj;</h1>
         </header>
     </main>
 </body>
