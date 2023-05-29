@@ -5,7 +5,7 @@ async function main() {
 
     function renderIcon({ Icon }) {
         const icon = document.createElement('img');
-        icon.classList.add('link-icon');
+        icon.classList.add('icon');
 
         icon.setAttribute('src', `${origin}${Icon.data.attributes.url}`);
 
@@ -23,16 +23,19 @@ async function main() {
 
     function renderLink({ attributes }) {
         const link = document.createElement('div');
-        link.classList.add('link-wrapper');
+        link.classList.add('link');
 
         // Render Icon
         link.appendChild(renderIcon(attributes));   
 
         // Render Text
         const meta = document.createElement('div');
-        meta.classList.add('meta-wrapper');
-        meta.appendChild(renderText('h2', 'link-title', attributes['Title']));
-        meta.appendChild(renderText('p', 'link-description', attributes['Description']));
+        meta.classList.add('content');
+        meta.appendChild(renderText('h2', 'title', attributes['Title']));
+        
+        if (attributes['Description']) 
+            meta.appendChild(renderText('p', 'description', attributes['Description']));
+
         link.appendChild(meta);
 
         if (attributes.Document.data) {
@@ -105,7 +108,7 @@ async function name(name, typewriterEffect) {
     }
 
     // Render name
-    const title = document.querySelector('h1.title');
+    const title = document.querySelector('h1.name');
 
     if (typewriterEffect) {
         title.classList.add('typewriter');
