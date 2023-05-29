@@ -1,6 +1,12 @@
 # Linkler
 
-Simple link landing page, features a strapi CMS for adding new link entries
+Customizable link landing page
+
+#### Features
+
+- Strapi CMS
+- Google Tag Manager & Google Analitics (Optional)
+- SSL (Optional)
 
 ## Configure
 
@@ -18,7 +24,7 @@ If you have an SSL certificate and private key, you can put the files in the `./
 
 If no files are found in the SSL directory, the server will host as a regular HTTP server
 
-## Docker Build
+## Build
 
 ```
 docker compose build
