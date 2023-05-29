@@ -1,20 +1,15 @@
 require('dotenv').config();
 
 const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const fs = require('node:fs');
 const { readFileOrUndefined } = require('./server/readFileOrUndefined');
 
 const https = require('node:https');
 const path = require('node:path');
-const { strapi } = require('./server/strapi');
 
 const app = express();
-
-app.use(express.json());
-
-// Static host the ./dist directory
-app.use(express.static(path.join(__dirname, './dist')));
 
 /**
  * Static host the ./dist directory
@@ -44,19 +39,44 @@ app.get('/', async (req, res) => {
 });
 
 /**
- * Bind uploads strapi endpoints 
+ * All Strapi routes
  */
-app.get('/uploads/*', async (req, res) => {
-    const url = strapi(req.originalUrl);
+const strapiRoutes = [
+    '/admin',
+    '/_next',
+    '/api',
+    '/auth',
+    '/content-manager',
+    '/uploads',
+    '/upload',
+    '/content-type-builder',
+    '/content-manager',
+    '/email',
+    '/favicon.ico',
+    '/i18n',
+    '/users-permissions'
+];
 
-    const response = await fetch(url);
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    res.set('Content-Type', response.headers.get('Content-Type'));
-    res.send(buffer);
+/**
+ * Create proxies for each strapi route
+ */
+strapiRoutes.forEach(route => {
+    app.use(
+        route,
+        createProxyMiddleware({
+            target: `http://${process.env.STRAPI_HOST}:${process.env.PORT}`,
+            changeOrigin: true,
+            followRedirects: true,
+            pathRewrite: {
+                [`^${route}`]: route,
+            },
+        })
+    );
 });
 
+/**
+ * Start the HTTP or HTTPS server
+ */
 if (fs.existsSync('./ssl')) {
     // If SSL credentials were added host HTTPS server
     
