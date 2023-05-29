@@ -1,6 +1,6 @@
 # Linkler
 
-Customizable link landing page
+Create customizable Landing Pages for Your Links
 
 [See Deployed example](https://links.matiasvlevi.com)
 
