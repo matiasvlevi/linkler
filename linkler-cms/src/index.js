@@ -32,6 +32,14 @@ const boostrapPermissions = async (strapi) => {
     .updateRole(_public.id, _public);
 };
 
+const publishDefaultData = async (strapi) => {
+  await strapi.entityService.create('api::meta.meta', {
+    data: {
+      publishedAt: new Date()  
+    },
+  });
+}
+
 module.exports = {
   /**
    * An asynchronous register function that runs before
@@ -50,5 +58,6 @@ module.exports = {
    */
   async bootstrap({ strapi }) {
     await boostrapPermissions(strapi);
+    await publishDefaultData(strapi);
   },
 };
