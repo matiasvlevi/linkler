@@ -68,11 +68,13 @@ async function main() {
         }
     }
 
-    function renderError() {
+    function renderError(additionalMessage) {
         const container = document.querySelector('main');
 
         const p = document.createElement('p');
-        p.textContent = 'No links found.';
+        p.innerHTML = '<p>No links found.</p>';
+        if (additionalMessage.length > 0) 
+            p.innerHTML += `<br/><p>${additionalMessage}</p>`;
         
         container.appendChild(p);
     }
@@ -84,7 +86,11 @@ async function main() {
             if (links.error) {
                 renderError();
             } else {
-                render(links)
+                if (links.data.length === 0) {
+                    renderError('Head over to the <a href="/admin">Admin Panel</a> to add new links');
+                } else {
+                    render(links)
+                }
             }
         });    
 }
