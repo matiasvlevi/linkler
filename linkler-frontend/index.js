@@ -4,7 +4,8 @@ const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const fs = require('node:fs');
-const { readFileOrUndefined } = require('./server/readFileOrUndefined');
+const readFileOrUndefined = require('./server/readFileOrUndefined');
+const errorPage = require('./server/errorPage');
 
 const https = require('node:https');
 const path = require('node:path');
@@ -14,8 +15,11 @@ const app = express();
 /**
  * Static host the ./dist directory
  */
-app.use(express.static(path.join(__dirname, './dist')));
+app.use(express.static(path.join(__dirname, './dist/public')));
 
+/**
+ * Root 
+ */
 app.get('/', async (req, res) => {
     let html = '';
 
