@@ -101,6 +101,12 @@ function moveIndex(files) {
         files.index.replace(files.src, files.dest).replace('template', 'html'),
         html, 'utf-8'
     );
+
+    let error = fs.readFileSync(files.error, 'utf-8');
+    fs.writeFileSync(
+        files.error.replace(files.src, files.dest).replace('template', 'html'),
+        error, 'utf-8'
+    );
 }
 
 function copyAssets(files) {
@@ -131,6 +137,7 @@ build({
     js: "./src/scripts",
     assets: "./src/assets",
     index: "./src/page.template",
+    error: "./src/error.template",
     google: {
         ga: { 
             head: "./src/google/ga_head.template"

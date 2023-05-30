@@ -24,7 +24,14 @@ app.get('/', async (req, res) => {
 
     // If no meta data found, send html
     if (data === null) {
-        html = '404';
+        html = fs.readFileSync('./dist/error.html', 'utf-8');
+        const HELP = 'https://github.com/matiasvlevi/linkler/README.md';
+
+        html = html.replaceAll('{{ERR-MESSAGE}}',`
+            <p>Failed to fetch Name Data from strapi.<p>
+            <p>Make sure the "Meta" Single Type is published</p>
+            <p>More help at: <a href="${HELP}">${HELP}</a></p>
+        `);
         res.send(html);
         return;
     }
