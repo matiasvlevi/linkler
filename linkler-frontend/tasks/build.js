@@ -88,8 +88,14 @@ function cleanGTM(template) {
 
 function moveTemplates(files) {
     let html = fs.readFileSync(files.index, 'utf-8');
-
-    if (process.env.GA_KEY && process.env.GTM_KEY) {
+    
+    if (
+        process.env.GA_KEY.length === 0 ||
+        process.env.GTM_KEY.length === 0
+    ) {
+        html = cleanGA(html);
+        html = cleanGTM(html);
+    } else {
         html = injectGA(files, html);
         html = injectGTM(files, html);
     } else {
