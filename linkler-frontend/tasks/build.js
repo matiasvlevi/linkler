@@ -86,7 +86,7 @@ function cleanGTM(template) {
     return template;
 }
 
-function moveIndex(files) {
+function moveTemplates(files) {
     let html = fs.readFileSync(files.index, 'utf-8');
 
     if (process.env.GA_KEY && process.env.GTM_KEY) {
@@ -124,7 +124,7 @@ const build = (async (files) => {
 
     await handleJS(files);
     handleCSS(files);
-    moveIndex(files);
+    moveTemplates(files);
     copyAssets(files);
 });
 
