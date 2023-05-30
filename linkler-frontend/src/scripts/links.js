@@ -51,6 +51,7 @@ async function main() {
             aref.setAttribute('target', '_blank');
         }
         aref.style.cursor = 'pointer';
+        aref.classList.add('button');
         aref.appendChild(link);
 
         return aref;
