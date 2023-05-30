@@ -1,6 +1,6 @@
 const { readFileSync } = require('node:fs');
 
-function readFileOrUndefined(filepath, codec) {
+module.exports = function readFileOrUndefined(filepath, codec) {
     try {
         return readFileSync(filepath, codec);
     } catch(e) {
@@ -8,5 +8,3 @@ function readFileOrUndefined(filepath, codec) {
         return undefined;
     }
 }
-
-module.exports = { readFileOrUndefined };

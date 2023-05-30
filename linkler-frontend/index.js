@@ -19,7 +19,22 @@ app.use(express.static(path.join(__dirname, './dist')));
 app.get('/', async (req, res) => {
     let html = '';
 
-    const response = await fetch(`http://${process.env.STRAPI_HOST}:${process.env.PORT}/api/meta`);
+    let response;
+    // Fetch meta data
+    try {
+        response = await fetch(`http://${process.env.STRAPI_HOST}:${process.env.PORT}/api/meta`);
+    } catch(e) {
+        res.send(errorPage(`
+        
+        <p>Failed to fetch from strapi.<p>
+        <p>
+            Make sure the strapi docker container is running <br/>
+        </p>
+
+        `));
+        return;
+    }
+
     const { data } = await response.json();
 
     // If no meta data found, send html
@@ -27,12 +42,16 @@ app.get('/', async (req, res) => {
         html = fs.readFileSync('./dist/error.html', 'utf-8');
         const HELP = 'https://github.com/matiasvlevi/linkler/README.md';
 
-        html = html.replaceAll('{{ERR-MESSAGE}}',`
-            <p>Failed to fetch Name Data from strapi.<p>
-            <p>Make sure the "Meta" Single Type is published</p>
-            <p>More help at: <a href="${HELP}">${HELP}</a></p>
-        `);
-        res.send(html);
+        res.send(errorPage(`
+
+        <p>Failed to fetch Name Data from strapi.<p>
+        <p>
+            Make sure the "Meta" Single Type is published <br/>
+            Head over to the <a href="/admin">Admin Panel</a>
+        </p>
+        <p>More help at: <a href="${HELP}">${HELP}</a></p>
+
+        `));
         return;
     }
 
