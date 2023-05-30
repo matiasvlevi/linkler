@@ -47,41 +47,29 @@ function handleCSS(files) {
 }
 
 function injectGA(files, template) {
-    const ga_reg = new RegExp(/\{\{GA-HEAD\}\}/gm);
-    template = template.replaceAll(ga_reg, fs.readFileSync(files.google.ga.head));
-
-    const ga_key_reg = new RegExp(/\{\{GA-KEY\}\}/gm);
-    template = template.replaceAll(ga_key_reg, process.env.GA_KEY);
+    template = template.replaceAll(/\{\{GA-HEAD\}\}/gm, fs.readFileSync(files.google.ga.head));
+    template = template.replaceAll(/\{\{GA-KEY\}\}/gm, process.env.GA_KEY);
 
     return template;
 }
 
 function injectGTM(files, template) {
-    const gtm_head_reg = new RegExp(/\{\{GTM-HEAD\}\}/gm);
-    template = template.replaceAll(gtm_head_reg, fs.readFileSync(files.google.gtm.head));
-
-    const gtm_body_reg = new RegExp(/\{\{GTM-BODY\}\}/gm);
-    template = template.replaceAll(gtm_body_reg, fs.readFileSync(files.google.gtm.body));
-
-    const gtm_key_reg = new RegExp(/\{\{GTM-KEY\}\}/gm);
-    template = template.replaceAll(gtm_key_reg, process.env.GTM_KEY);
+    template = template.replaceAll(/\{\{GTM-HEAD\}\}/gm, fs.readFileSync(files.google.gtm.head));
+    template = template.replaceAll(/\{\{GTM-BODY\}\}/gm, fs.readFileSync(files.google.gtm.body));
+    template = template.replaceAll(/\{\{GTM-KEY\}\}/gm, process.env.GTM_KEY);
 
     return template;
 }
 
 function cleanGA(template) {
-    const ga_reg = new RegExp(/\{\{GA-HEAD\}\}/gm);
-    template = template.replaceAll(ga_reg, '');
+    template = template.replaceAll(/\{\{GA-HEAD\}\}/gm, '');
 
     return template;
 }
 
 function cleanGTM(template) {
-    const gtm_head_reg = new RegExp(/\{\{GTM-HEAD\}\}/gm);
-    template = template.replaceAll(gtm_head_reg, '');
-
-    const gtm_body_reg = new RegExp(/\{\{GTM-BODY\}\}/gm);
-    template = template.replaceAll(gtm_body_reg, '');
+    template = template.replaceAll(/\{\{GTM-HEAD\}\}/gm, '');
+    template = template.replaceAll(/\{\{GTM-BODY\}\}/gm, '');
 
     return template;
 }
@@ -98,9 +86,6 @@ function moveTemplates(files) {
     } else {
         html = injectGA(files, html);
         html = injectGTM(files, html);
-    } else {
-        html = cleanGA(html);
-        html = cleanGTM(html);
     }
 
     fs.writeFileSync(
