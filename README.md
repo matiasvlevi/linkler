@@ -55,7 +55,4 @@ Once up, you can access the link page at `http://127.0.0.1:WEB_PORT` and the adm
 
 ---
 
-### Notes
-
-You might want to add `find` and `findOne` permissions to `links` and `meta` apis in the strapi Role Settings.
-This is planned to be bootstrapped by default in the next versions.
+License MIT
