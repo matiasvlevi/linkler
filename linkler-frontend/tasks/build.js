@@ -81,14 +81,17 @@ function handleCSS(files) {
 function moveTemplates(files) {
     let html = fs.readFileSync(files.index, 'utf-8');
     
-    if (
-        process.env.GA_KEY.length === 0 ||
-        process.env.GTM_KEY.length === 0
-    ) {
+    // Fill GA Template
+    if (process.env.GA_KEY.length === 0) {
         html = cleanGA(html);
-        html = cleanGTM(html);
     } else {
         html = injectGA(files, html);
+    }
+
+    // Fill GTM Template
+    if (process.env.GTM_KEY.length === 0) {
+        html = cleanGTM(html);
+    } else {
         html = injectGTM(files, html);
     }
 
