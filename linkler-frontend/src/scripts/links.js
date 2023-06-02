@@ -87,7 +87,7 @@ async function main() {
                 renderError();
             } else {
                 if (links.data.length === 0) {
-                    renderError('Head over to the <a href="/admin">Admin Panel</a> to add new links');
+                    renderError('Head over to the <a target="_blank" href="/admin">Admin Panel</a> to add new links');
                 } else {
                     render(links)
                 }
