@@ -21,6 +21,10 @@ a {
     color: #2ea1ee;
 }
 
+p {
+    font-size: 0.9em;
+}
+
 h1.typewriter {
     border-right: .15em solid var(--on-bck);
     animation: caret .9s step-end infinite;
