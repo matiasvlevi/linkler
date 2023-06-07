@@ -15,6 +15,7 @@ ARG GA_KEY
 ENV GTM_KEY=$GTM_KEY
 ENV GA_KEY=$GA_KEY
 
+RUN rm -rf dist
 RUN npm run build
 
 CMD ["npm", "start"]
